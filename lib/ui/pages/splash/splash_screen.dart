@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:airplane/cubits/auth_cubit.dart';
+import 'package:airplane/cubits/destination_cubit.dart';
+import 'package:airplane/cubits/gallery_cubit.dart';
+import 'package:airplane/cubits/transaction_cubit.dart';
 import 'package:airplane/routes/route_name.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,8 +27,10 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushNamedAndRemoveUntil(
             context, RouteName.getStartedPage, (route) => false);
       } else {
-        print('email: ${user.email}');
         context.read<AuthCubit>().getCurrentUser(user.uid);
+        context.read<DestinationCubit>().fetchDestinations();
+        context.read<GalleryCubit>().fetchGallery();
+        context.read<TransactionCubit>().fetchTransactions();
         Navigator.pushNamedAndRemoveUntil(
             context, RouteName.mainPage, (route) => false);
       }

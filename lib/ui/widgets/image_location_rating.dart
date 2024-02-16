@@ -3,14 +3,14 @@ import 'package:airplane/ui/widgets/location_rating.dart';
 import 'package:flutter/material.dart';
 
 class ImageLocationRating extends StatelessWidget {
-  final String imageAsset;
+  final String imageUrl;
   final String destination;
   final String location;
   final double rating;
 
   const ImageLocationRating({
     super.key,
-    required this.imageAsset,
+    required this.imageUrl,
     required this.destination,
     required this.location,
     required this.rating,
@@ -20,7 +20,7 @@ class ImageLocationRating extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Gallery(imageAsset: imageAsset),
+        Gallery(imageUrl: imageUrl),
         SizedBox(width: 16,),
         Expanded(
           child: LocationRating(

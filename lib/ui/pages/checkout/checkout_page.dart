@@ -1,15 +1,25 @@
-import 'package:airplane/ui/pages/checkout/widgets/booking_detail_card.dart';
+import 'package:airplane/cubits/transaction_cubit.dart';
+import 'package:airplane/cubits/transaction_state.dart';
+import 'package:airplane/models/transaction_model.dart';
+import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/widgets/booking_detail_card.dart';
 import 'package:airplane/ui/pages/checkout/widgets/flight_route.dart';
 import 'package:airplane/ui/pages/checkout/widgets/payment_detail.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/my_button.dart';
+import 'package:airplane/ui/widgets/my_circular_indicator.dart';
+import 'package:airplane/ui/widgets/my_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final transaction =
+        ModalRoute.of(context)!.settings.arguments as TransactionModel;
+
     return Scaffold(
       backgroundColor: backgroundColor1,
       body: SafeArea(
@@ -23,7 +33,7 @@ class CheckoutPage extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            BookingDetailCard(),
+            BookingDetailCard(transaction),
             const SizedBox(
               height: 30,
             ),
@@ -31,9 +41,29 @@ class CheckoutPage extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            MyButton(
-              text: 'Pay Now',
-              onTap: () {},
+            BlocConsumer<TransactionCubit, TransactionState>(
+              listener: (context, state) {
+                if (state is TransactionSuccess) {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, RouteName.successCheckoutPage, (route) => false);
+                } else if (state is TransactionFailed) {
+                  MySnackBar.showSnackBar(
+                    context,
+                    message: state.error,
+                    isSuccess: false,
+                  );
+                }
+              },
+              builder: (context, state) => (state is TransactionLoading)
+                  ? MyCircularIndicator.show()
+                  : MyButton(
+                      text: 'Pay Now',
+                      onTap: () {
+                        context
+                            .read<TransactionCubit>()
+                            .createTransaction(transaction);
+                        context.read<TransactionCubit>().fetchTransactions();
+                      }),
             ),
             const SizedBox(
               height: 30,

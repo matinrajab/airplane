@@ -1,13 +1,14 @@
+import 'package:airplane/cubits/destination_cubit.dart';
+import 'package:airplane/cubits/destination_state.dart';
 import 'package:airplane/ui/pages/home/home/destination_card.dart';
 import 'package:airplane/ui/pages/home/home/destination_tile.dart';
 import 'package:airplane/ui/pages/home/home/home_page_header.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
-  final List<String?> _destinations = List.generate(10, (index) => null);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,22 +24,31 @@ class HomePage extends StatelessWidget {
           ),
           child: HomePageHeader(),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         SizedBox(
           height: 325,
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: DestinationCard(),
-            ),
-          ),
+          child: BlocBuilder<DestinationCubit, DestinationState>(
+              builder: (context, state) {
+            if (state is DestinationSuccess) {
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                scrollDirection: Axis.horizontal,
+                itemCount: state.destinations.length,
+                itemBuilder: (BuildContext context, int index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: DestinationCard(
+                    destination: state.destinations[index],
+                  ),
+                ),
+              );
+            } else {
+              return const SizedBox();
+            }
+          }),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         Padding(
@@ -57,14 +67,21 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: defaultHorizontalPadding,
           ),
-          child: Column(
-            children: _destinations
-                .map((e) => Padding(
+          child: BlocBuilder<DestinationCubit, DestinationState>(
+              builder: (context, state) {
+                if(state is DestinationSuccess){
+                  return Column(
+                    children: state.destinations
+                        .map((destination) => Padding(
                       padding: const EdgeInsets.only(top: 16),
-                      child: DestinationTile(),
+                      child: DestinationTile(destination: destination),
                     ))
-                .toList(),
-          ),
+                        .toList(),
+                  );
+                }else{
+                  return const SizedBox();
+                }
+              }),
         ),
       ],
     );

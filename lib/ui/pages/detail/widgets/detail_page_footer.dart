@@ -3,7 +3,14 @@ import 'package:airplane/ui/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
 class DetailPageFooter extends StatelessWidget {
-  const DetailPageFooter({super.key});
+  final String price;
+  final GestureTapCallback buttonTapped;
+
+  const DetailPageFooter({
+    super.key,
+    required this.price,
+    required this.buttonTapped,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,17 +18,17 @@ class DetailPageFooter extends StatelessWidget {
       children: [
         Expanded(
           child: TextListTile(
-            title: 'IDR 66.600.000',
+            title: price,
             subtitle: 'per orang',
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
         Expanded(
           child: MyButton(
             text: 'Book Now',
-            onTap: () {},
+            onTap: buttonTapped,
           ),
         ),
       ],

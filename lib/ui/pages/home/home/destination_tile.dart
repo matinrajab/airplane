@@ -1,20 +1,34 @@
+import 'package:airplane/models/destination_model.dart';
+import 'package:airplane/routes/route_name.dart';
 import 'package:airplane/ui/widgets/card_field.dart';
 import 'package:airplane/ui/widgets/image_location_rating.dart';
 import 'package:flutter/material.dart';
 
 class DestinationTile extends StatelessWidget {
-  const DestinationTile({super.key});
+  final DestinationModel destination;
+
+  const DestinationTile({
+    super.key,
+    required this.destination,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return CardField(
-      verticalPadding: 10,
-      horizontalPadding: 12,
-      child: ImageLocationRating(
-        imageAsset: 'assets/image/image_destination1.png',
-        destination: 'Danau Beratan',
-        location: 'Singajara',
-        rating: 4.6,
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(
+        context,
+        RouteName.detailPage,
+        arguments: destination,
+      ),
+      child: CardField(
+        verticalPadding: 10,
+        horizontalPadding: 12,
+        child: ImageLocationRating(
+          imageUrl: destination.imageUrl,
+          destination: destination.name,
+          location: destination.city,
+          rating: destination.rating,
+        ),
       ),
     );
   }

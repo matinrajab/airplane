@@ -2,11 +2,11 @@ import 'package:airplane/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class Gallery extends StatelessWidget {
-  final String imageAsset;
+  final String imageUrl;
 
   const Gallery({
     super.key,
-    required this.imageAsset,
+    required this.imageUrl,
   });
 
   @override
@@ -15,8 +15,8 @@ class Gallery extends StatelessWidget {
       borderRadius: BorderRadius.circular(
         defaultRadius,
       ),
-      child: Image.asset(
-        imageAsset,
+      child: Image.network(
+        imageUrl,
         height: 70,
         width: 70,
         fit: BoxFit.cover,

@@ -1,5 +1,5 @@
 import 'package:airplane/routes/route_name.dart';
-import 'package:airplane/ui/pages/bonus/widgets/bonus_card.dart';
+import 'package:airplane/ui/widgets/wallet_card.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/information.dart';
 import 'package:airplane/ui/widgets/my_button.dart';
@@ -17,16 +17,16 @@ class BonusPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BonusCard(),
-            SizedBox(
+            const WalletCard(),
+            const SizedBox(
               height: 90,
             ),
-            Information(
+            const Information(
               title: 'Big Bonus 🎉',
               information:
                   'We give you early credit so that you can buy a flight ticket',
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             MyButton(

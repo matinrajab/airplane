@@ -20,7 +20,7 @@ class Rating extends StatelessWidget {
           'assets/icon/icon_star.png',
           width: 24,
         ),
-        SizedBox(width: 2,),
+        const SizedBox(width: 2,),
         Text(
           rating.toStringAsPrecision(2),
           style: GoogleFonts.poppins(

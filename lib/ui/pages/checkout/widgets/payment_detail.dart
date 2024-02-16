@@ -1,8 +1,12 @@
+import 'package:airplane/cubits/auth_cubit.dart';
+import 'package:airplane/cubits/auth_state.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/card_field.dart';
 import 'package:airplane/ui/widgets/card_field_section.dart';
 import 'package:airplane/ui/widgets/text_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class PaymentDetail extends StatelessWidget {
   const PaymentDetail({super.key});
@@ -52,13 +56,25 @@ class PaymentDetail extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
             Expanded(
-              child: TextListTile(
-                title: 'IDR 80.400.000',
-                subtitle: 'Current Balance',
+              child: BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if(state is AuthSuccess){
+                    return TextListTile(
+                      title: NumberFormat.currency(
+                        locale: 'id',
+                        symbol: 'IDR ',
+                        decimalDigits: 0,
+                      ).format(state.user.balance),
+                      subtitle: 'Current Balance',
+                    );
+                  }else{
+                    return const SizedBox();
+                  }
+                },
               ),
             ),
           ],

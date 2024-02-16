@@ -1,47 +1,59 @@
+import 'package:airplane/models/transaction_model.dart';
 import 'package:airplane/ui/pages/checkout/widgets/booking_detail_item.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/card_field_section.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BookingDetail extends StatelessWidget {
-  const BookingDetail({super.key});
+  final TransactionModel transaction;
+
+  const BookingDetail(this.transaction, {super.key});
 
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> bookingDetailItems = [
       {
         'title': 'Traveler',
-        'value': '2 person',
+        'value': '${transaction.amountOfTraveler} person',
         'valueColor': primaryTextColor,
       },
       {
         'title': 'Seat',
-        'value': 'A3, B3',
+        'value': transaction.selectedSeats,
         'valueColor': primaryTextColor,
       },
       {
         'title': 'Insurance',
-        'value': 'YES',
-        'valueColor': successColor,
+        'value': transaction.insurance ? 'YES' : 'NO',
+        'valueColor': transaction.insurance ? successColor : dangerColor,
       },
       {
         'title': 'Refundable',
-        'value': 'NO',
-        'valueColor': dangerColor,
+        'value': transaction.refundable ? 'YES' : 'NO',
+        'valueColor': transaction.refundable ? successColor : dangerColor,
       },
       {
         'title': 'VAT',
-        'value': '45%',
+        'value': '${(transaction.vat * 100).toStringAsFixed(0)}%',
         'valueColor': primaryTextColor,
       },
       {
         'title': 'Price',
-        'value': 'IDR 8.500.000',
+        'value': NumberFormat.currency(
+          locale: 'id',
+          symbol: 'IDR ',
+          decimalDigits: 0,
+        ).format(transaction.price),
         'valueColor': primaryTextColor,
       },
       {
         'title': 'Grand Total',
-        'value': 'IDR 12.000.000',
+        'value': NumberFormat.currency(
+          locale: 'id',
+          symbol: 'IDR ',
+          decimalDigits: 0,
+        ).format(transaction.grandTotal),
         'valueColor': primaryColor,
       },
     ];

@@ -2,6 +2,8 @@ import 'package:airplane/cubits/page_cubit.dart';
 import 'package:airplane/ui/pages/home/home_page.dart';
 import 'package:airplane/ui/pages/main/widgets/my_bottom_nav_bar_item.dart';
 import 'package:airplane/ui/pages/setting/setting_page.dart';
+import 'package:airplane/ui/pages/transaction/transaction_page.dart';
+import 'package:airplane/ui/pages/wallet/wallet_page.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/card_field.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +20,9 @@ class MainPage extends StatelessWidget {
   ];
 
   final List<Widget> _body = [
-    HomePage(),
-    const Center(
-      child: Text('transaction'),
-    ),
-    const Center(
-      child: Text('wallet'),
-    ),
+    const HomePage(),
+    const TransactionPage(),
+    const WalletPage(),
     const SettingPage(),
   ];
 
