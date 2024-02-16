@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "850491196546",
+    "project_id": "airplane-fcdec",
+    "storage_bucket": "airplane-fcdec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850491196546:android:250b6c18ee9654b8a3e09b",
+        "android_client_info": {
+          "package_name": "com.matin.airplane"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpynd9DogfgnPkxiruZWop9xbDHdYemLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

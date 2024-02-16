@@ -1,3 +1,4 @@
+import 'package:airplane/routes/route_name.dart';
 import 'package:airplane/ui/pages/bonus/widgets/bonus_card.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/information.dart';
@@ -22,7 +23,8 @@ class BonusPage extends StatelessWidget {
             ),
             Information(
               title: 'Big Bonus 🎉',
-              information: 'We give you early credit so that you can buy a flight ticket',
+              information:
+                  'We give you early credit so that you can buy a flight ticket',
             ),
             SizedBox(
               height: 50,
@@ -30,7 +32,8 @@ class BonusPage extends StatelessWidget {
             MyButton(
               width: 220,
               text: 'Start Fly Now',
-              onTap: () {},
+              onTap: () => Navigator.pushNamedAndRemoveUntil(
+                  context, RouteName.mainPage, (route) => false),
             ),
           ],
         ),

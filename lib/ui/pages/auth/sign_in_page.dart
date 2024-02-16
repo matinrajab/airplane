@@ -11,13 +11,11 @@ import 'package:airplane/ui/widgets/my_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpPage extends StatelessWidget {
-  SignUpPage({super.key});
+class SignInPage extends StatelessWidget {
+  SignInPage({super.key});
 
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _hobbyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +29,8 @@ class SignUpPage extends StatelessWidget {
           ),
           children: [
             const Header(
-              topText: 'Join us and get',
-              bottomText: 'your next journey',
+              topText: 'Sign In with your',
+              bottomText: 'existing account',
             ),
             const SizedBox(
               height: 30,
@@ -41,14 +39,6 @@ class SignUpPage extends StatelessWidget {
               horizontalPadding: 20,
               child: Column(
                 children: [
-                  MyTextFormField(
-                    controller: _nameController,
-                    title: 'Full Name',
-                    hintText: 'Your Full Name',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   MyTextFormField(
                     controller: _emailController,
                     title: 'Email Address',
@@ -64,21 +54,13 @@ class SignUpPage extends StatelessWidget {
                     hintText: 'Your Password',
                   ),
                   const SizedBox(
-                    height: 20,
-                  ),
-                  MyTextFormField(
-                    controller: _hobbyController,
-                    title: 'Hobby',
-                    hintText: 'Your Hobby',
-                  ),
-                  const SizedBox(
                     height: 30,
                   ),
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       if (state is AuthSuccess) {
                         Navigator.pushNamedAndRemoveUntil(
-                            context, RouteName.bonusPage, (route) => false);
+                            context, RouteName.mainPage, (route) => false);
                       } else if (state is AuthFailed) {
                         MySnackBar.showSnackBar(
                           context,
@@ -90,12 +72,10 @@ class SignUpPage extends StatelessWidget {
                     builder: (context, state) => (state is AuthLoading)
                         ? MyCircularIndicator.show()
                         : MyButton(
-                            text: 'Get Started',
-                            onTap: () => context.read<AuthCubit>().signUp(
-                                  email: _emailController.text.trim(),
-                                  password: _passwordController.text.trim(),
-                                  name: _nameController.text.trim(),
-                                  hobby: _hobbyController.text.trim(),
+                            text: 'Sign In',
+                            onTap: () => context.read<AuthCubit>().signIn(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
                                 ),
                           ),
                   ),
@@ -107,9 +87,9 @@ class SignUpPage extends StatelessWidget {
             ),
             Center(
               child: GestureDetector(
-                onTap: () => Navigator.pop(context),
+                onTap: () => Navigator.pushNamed(context, RouteName.signUpPage),
                 child: Text(
-                  'Have an account? Sign In',
+                  'Don\'t have an account? Sign Up',
                   style: subtitleTextStyle.copyWith(
                     decoration: TextDecoration.underline,
                     decorationColor: subtitleTextColor,

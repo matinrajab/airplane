@@ -1,6 +1,9 @@
+import 'package:airplane/cubits/auth_cubit.dart';
+import 'package:airplane/cubits/auth_state.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({super.key});
@@ -13,12 +16,20 @@ class HomePageHeader extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Header(
-                topText: 'Howdy,',
-                bottomText: 'Kezie Anne',
+              child: BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthSuccess) {
+                    return Header(
+                      topText: 'Howdy,',
+                      bottomText: state.user.name,
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Container(
@@ -36,7 +47,7 @@ class HomePageHeader extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 6,
         ),
         Text(

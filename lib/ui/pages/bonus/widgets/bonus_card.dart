@@ -1,8 +1,9 @@
-import 'dart:ui';
-
+import 'package:airplane/cubits/auth_cubit.dart';
+import 'package:airplane/cubits/auth_state.dart';
 import 'package:airplane/ui/pages/bonus/widgets/bonus_card_item.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BonusCard extends StatelessWidget {
   const BonusCard({super.key});
@@ -22,16 +23,18 @@ class BonusCard extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(defaultHorizontalPadding),
+          padding: const EdgeInsets.all(defaultHorizontalPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Expanded(
-                    child: BonusCartItem(
-                      title: 'Name',
-                      information: 'Matin',
+                    child: BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) => BonusCartItem(
+                        title: 'Name',
+                        information: (state as AuthSuccess).user.name,
+                      ),
                     ),
                   ),
                   Row(
@@ -40,7 +43,7 @@ class BonusCard extends StatelessWidget {
                         'assets/icon/icon_plane.png',
                         width: 24,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                       Text(
@@ -54,13 +57,15 @@ class BonusCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              BonusCartItem(
-                title: 'Balance',
-                information: 'IDR 280.000.000',
-                fontSize: 26,
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) => BonusCartItem(
+                  title: 'Balance',
+                  information: '${(state as AuthSuccess).user.balance}',
+                  fontSize: 26,
+                ),
               ),
             ],
           ),

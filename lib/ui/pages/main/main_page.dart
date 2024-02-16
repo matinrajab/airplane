@@ -1,18 +1,14 @@
+import 'package:airplane/cubits/page_cubit.dart';
 import 'package:airplane/ui/pages/home/home_page.dart';
 import 'package:airplane/ui/pages/main/widgets/my_bottom_nav_bar_item.dart';
+import 'package:airplane/ui/pages/setting/setting_page.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/card_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  int _currentIndex = 0;
+class MainPage extends StatelessWidget {
+  MainPage({super.key});
 
   final List<String> _bottomNavBarItems = [
     'assets/icon/icon_home.png',
@@ -23,21 +19,25 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _body = [
     HomePage(),
-    const SizedBox(),
-    const SizedBox(),
-    const SizedBox(),
+    const Center(
+      child: Text('transaction'),
+    ),
+    const Center(
+      child: Text('wallet'),
+    ),
+    const SettingPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
-
     return Scaffold(
       backgroundColor: backgroundColor1,
       body: Stack(
         children: [
           SafeArea(
-            child: _body[_currentIndex],
+            child: BlocBuilder<PageCubit, int>(
+              builder: (context, currentIndex) => _body[currentIndex],
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -50,29 +50,27 @@ class _MainPageState extends State<MainPage> {
                 height: 60,
                 child: CardField(
                   verticalPadding: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: _bottomNavBarItems.map(
-                      (item) {
-                        int tempIndex = index;
-                        return Material(
-                          color: transparentColor,
-                          borderRadius: BorderRadius.circular(30),
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(30),
-                            onTap: () {
-                              setState(() {
-                                _currentIndex = tempIndex;
-                              });
-                            },
-                            child: MyBottomNavBarItem(
+                  child: BlocBuilder<PageCubit, int>(
+                    builder: (context, currentIndex) {
+                      int index = 0;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: _bottomNavBarItems.map(
+                          (item) {
+                            int indexTemp = index;
+                            return MyBottomNavBarItem(
+                              onTap: () {
+                                context
+                                    .read<PageCubit>()
+                                    .setCurrentIndex(indexTemp);
+                              },
                               imageAsset: item,
-                              isSelected: index++ == _currentIndex,
-                            ),
-                          ),
-                        );
-                      },
-                    ).toList(),
+                              isSelected: index++ == currentIndex,
+                            );
+                          },
+                        ).toList(),
+                      );
+                    },
                   ),
                 ),
               ),
