@@ -1,7 +1,7 @@
 import 'package:airplane/cubits/seat_cubit.dart';
 import 'package:airplane/models/destination_model.dart';
 import 'package:airplane/models/transaction_model.dart';
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/checkout/checkout_page.dart';
 import 'package:airplane/ui/pages/choose_seat/widgets/seat_status.dart';
 import 'package:airplane/ui/pages/choose_seat/widgets/select_seat.dart';
 import 'package:airplane/ui/theme/theme.dart';
@@ -11,13 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChooseSeatPage extends StatelessWidget {
-  const ChooseSeatPage({super.key});
+  static const routeName = '/choose-seat';
+
+  final DestinationModel destination;
+
+  const ChooseSeatPage({
+    super.key,
+    required this.destination,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final destination =
-        ModalRoute.of(context)!.settings.arguments as DestinationModel;
-
     return Scaffold(
       backgroundColor: backgroundColor1,
       body: SafeArea(
@@ -50,7 +54,7 @@ class ChooseSeatPage extends StatelessWidget {
 
                   Navigator.pushNamed(
                     context,
-                    RouteName.checkoutPage,
+                    CheckoutPage.routeName,
                     arguments: TransactionModel(
                       destination: destination,
                       amountOfTraveler: state.length,

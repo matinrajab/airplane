@@ -1,5 +1,5 @@
 import 'package:airplane/cubits/page_cubit.dart';
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/main/main_page.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/information.dart';
 import 'package:airplane/ui/widgets/my_button.dart';
@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SuccessCheckoutPage extends StatelessWidget {
+  static const routeName = '/success-checkout';
+
   const SuccessCheckoutPage({super.key});
 
   @override
@@ -36,7 +38,7 @@ class SuccessCheckoutPage extends StatelessWidget {
               onTap: () {
                 context.read<PageCubit>().setCurrentIndex(1);
                 Navigator.pushNamedAndRemoveUntil(
-                    context, RouteName.mainPage, (route) => false);
+                    context, MainPage.routeName, (route) => false);
               },
             ),
           ],

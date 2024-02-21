@@ -1,9 +1,11 @@
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/auth/sign_in_page.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
 class GetStartedPage extends StatelessWidget {
+  static const routeName = '/get-started';
+
   const GetStartedPage({super.key});
 
   @override
@@ -48,7 +50,7 @@ class GetStartedPage extends StatelessWidget {
             width: 220,
             text: 'Get Started',
             onTap: () {
-              Navigator.pushNamed(context, RouteName.signInPage);
+              Navigator.pushNamed(context, SignInPage.routeName);
             },
           ),
           const SizedBox(

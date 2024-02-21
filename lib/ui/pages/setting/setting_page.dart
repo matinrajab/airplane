@@ -1,7 +1,7 @@
 import 'package:airplane/cubits/auth_cubit.dart';
 import 'package:airplane/cubits/auth_state.dart';
 import 'package:airplane/cubits/page_cubit.dart';
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/auth/sign_in_page.dart';
 import 'package:airplane/ui/widgets/my_button.dart';
 import 'package:airplane/ui/widgets/my_circular_indicator.dart';
 import 'package:airplane/ui/widgets/my_snack_bar.dart';
@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingPage extends StatelessWidget {
+  static const routeName = '/setting';
+
   const SettingPage({super.key});
 
   @override
@@ -18,7 +20,7 @@ class SettingPage extends StatelessWidget {
         listener: (context, state) {
           if (state is AuthInitial) {
             Navigator.pushNamedAndRemoveUntil(
-                context, RouteName.signInPage, (route) => false);
+                context, SignInPage.routeName, (route) => false);
             context.read<PageCubit>().setCurrentIndex(0);
           } else if (state is AuthFailed) {
             MySnackBar.showSnackBar(

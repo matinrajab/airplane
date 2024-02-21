@@ -1,5 +1,5 @@
 import 'package:airplane/models/destination_model.dart';
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/detail/detail_page.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/card_field.dart';
 import 'package:airplane/ui/widgets/rating.dart';
@@ -19,7 +19,7 @@ class DestinationCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.pushNamed(
         context,
-        RouteName.detailPage,
+        DetailPage.routeName,
         arguments: destination,
       ),
       child: SizedBox(

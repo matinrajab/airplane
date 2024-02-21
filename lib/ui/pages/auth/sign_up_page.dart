@@ -1,7 +1,7 @@
 import 'package:airplane/cubits/auth_cubit.dart';
 import 'package:airplane/cubits/auth_state.dart';
-import 'package:airplane/routes/route_name.dart';
 import 'package:airplane/ui/pages/auth/widgets/my_text_form_field.dart';
+import 'package:airplane/ui/pages/bonus/bonus_page.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/card_field.dart';
 import 'package:airplane/ui/widgets/header.dart';
@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatelessWidget {
+  static const routeName = '/sign-up';
+
   SignUpPage({super.key});
 
   final TextEditingController _nameController = TextEditingController();
@@ -78,7 +80,7 @@ class SignUpPage extends StatelessWidget {
                     listener: (context, state) {
                       if (state is AuthSuccess) {
                         Navigator.pushNamedAndRemoveUntil(
-                            context, RouteName.bonusPage, (route) => false);
+                            context, BonusPage.routeName, (route) => false);
                       } else if (state is AuthFailed) {
                         MySnackBar.showSnackBar(
                           context,

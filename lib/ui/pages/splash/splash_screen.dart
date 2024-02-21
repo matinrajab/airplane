@@ -4,13 +4,16 @@ import 'package:airplane/cubits/auth_cubit.dart';
 import 'package:airplane/cubits/destination_cubit.dart';
 import 'package:airplane/cubits/gallery_cubit.dart';
 import 'package:airplane/cubits/transaction_cubit.dart';
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/get_started/get_started_page.dart';
+import 'package:airplane/ui/pages/main/main_page.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const routeName = '/';
+
   const SplashScreen({super.key});
 
   @override
@@ -25,14 +28,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
       if (user == null) {
         Navigator.pushNamedAndRemoveUntil(
-            context, RouteName.getStartedPage, (route) => false);
+            context, GetStartedPage.routeName, (route) => false);
       } else {
         context.read<AuthCubit>().getCurrentUser(user.uid);
         context.read<DestinationCubit>().fetchDestinations();
         context.read<GalleryCubit>().fetchGallery();
         context.read<TransactionCubit>().fetchTransactions();
         Navigator.pushNamedAndRemoveUntil(
-            context, RouteName.mainPage, (route) => false);
+            context, MainPage.routeName, (route) => false);
       }
     });
     super.initState();

@@ -1,4 +1,4 @@
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/main/main_page.dart';
 import 'package:airplane/ui/widgets/wallet_card.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/information.dart';
@@ -6,6 +6,8 @@ import 'package:airplane/ui/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
 class BonusPage extends StatelessWidget {
+  static const routeName = '/bonus';
+
   const BonusPage({super.key});
 
   @override
@@ -33,7 +35,7 @@ class BonusPage extends StatelessWidget {
               width: 220,
               text: 'Start Fly Now',
               onTap: () => Navigator.pushNamedAndRemoveUntil(
-                  context, RouteName.mainPage, (route) => false),
+                  context, MainPage.routeName, (route) => false),
             ),
           ],
         ),

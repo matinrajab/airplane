@@ -1,7 +1,8 @@
 import 'package:airplane/cubits/auth_cubit.dart';
 import 'package:airplane/cubits/auth_state.dart';
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/auth/sign_up_page.dart';
 import 'package:airplane/ui/pages/auth/widgets/my_text_form_field.dart';
+import 'package:airplane/ui/pages/main/main_page.dart';
 import 'package:airplane/ui/theme/theme.dart';
 import 'package:airplane/ui/widgets/card_field.dart';
 import 'package:airplane/ui/widgets/header.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInPage extends StatelessWidget {
+  static const routeName = '/sign-in';
+
   SignInPage({super.key});
 
   final TextEditingController _emailController = TextEditingController();
@@ -60,7 +63,7 @@ class SignInPage extends StatelessWidget {
                     listener: (context, state) {
                       if (state is AuthSuccess) {
                         Navigator.pushNamedAndRemoveUntil(
-                            context, RouteName.mainPage, (route) => false);
+                            context, MainPage.routeName, (route) => false);
                       } else if (state is AuthFailed) {
                         MySnackBar.showSnackBar(
                           context,
@@ -87,7 +90,7 @@ class SignInPage extends StatelessWidget {
             ),
             Center(
               child: GestureDetector(
-                onTap: () => Navigator.pushNamed(context, RouteName.signUpPage),
+                onTap: () => Navigator.pushNamed(context, SignUpPage.routeName),
                 child: Text(
                   'Don\'t have an account? Sign Up',
                   style: subtitleTextStyle.copyWith(

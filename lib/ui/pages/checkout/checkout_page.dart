@@ -1,7 +1,7 @@
 import 'package:airplane/cubits/transaction_cubit.dart';
 import 'package:airplane/cubits/transaction_state.dart';
 import 'package:airplane/models/transaction_model.dart';
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/checkout/success_checkout_page.dart';
 import 'package:airplane/ui/widgets/booking_detail_card.dart';
 import 'package:airplane/ui/pages/checkout/widgets/flight_route.dart';
 import 'package:airplane/ui/pages/checkout/widgets/payment_detail.dart';
@@ -13,13 +13,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({super.key});
+  static const routeName = '/checkout';
+
+  final TransactionModel transaction;
+
+  const CheckoutPage({
+    super.key,
+    required this.transaction,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final transaction =
-        ModalRoute.of(context)!.settings.arguments as TransactionModel;
-
     return Scaffold(
       backgroundColor: backgroundColor1,
       body: SafeArea(
@@ -45,7 +49,7 @@ class CheckoutPage extends StatelessWidget {
               listener: (context, state) {
                 if (state is TransactionSuccess) {
                   Navigator.pushNamedAndRemoveUntil(
-                      context, RouteName.successCheckoutPage, (route) => false);
+                      context, SuccessCheckoutPage.routeName, (route) => false);
                 } else if (state is TransactionFailed) {
                   MySnackBar.showSnackBar(
                     context,

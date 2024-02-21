@@ -1,5 +1,5 @@
 import 'package:airplane/models/destination_model.dart';
-import 'package:airplane/routes/route_name.dart';
+import 'package:airplane/ui/pages/choose_seat/choose_seat_page.dart';
 import 'package:airplane/ui/pages/detail/widgets/destination_detail_card.dart';
 import 'package:airplane/ui/pages/detail/widgets/detail_page_footer.dart';
 import 'package:airplane/ui/theme/theme.dart';
@@ -8,13 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
+  static const routeName = '/detail';
+
+  final DestinationModel destination;
+
+  const DetailPage({
+    super.key,
+    required this.destination,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final destination =
-        ModalRoute.of(context)!.settings.arguments as DestinationModel;
-
     return Scaffold(
       backgroundColor: backgroundColor1,
       body: Stack(
@@ -67,7 +71,7 @@ class DetailPage extends StatelessWidget {
                   ).format(destination.price),
                   buttonTapped: () => Navigator.pushNamed(
                     context,
-                    RouteName.chooseSeatPage,
+                    ChooseSeatPage.routeName,
                     arguments: destination,
                   ),
                 ),

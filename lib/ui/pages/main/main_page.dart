@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatelessWidget {
+  static const routeName = '/main';
+
   MainPage({super.key});
 
   final List<String> _bottomNavBarItems = [
