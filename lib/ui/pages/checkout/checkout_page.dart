@@ -33,7 +33,7 @@ class CheckoutPage extends StatelessWidget {
             horizontal: defaultHorizontalPadding,
           ),
           children: [
-            FlightRoute(),
+            const FlightRoute(),
             const SizedBox(
               height: 30,
             ),
@@ -41,7 +41,7 @@ class CheckoutPage extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            PaymentDetail(),
+            const PaymentDetail(),
             const SizedBox(
               height: 30,
             ),

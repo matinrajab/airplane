@@ -2,6 +2,7 @@ import 'package:airplane/cubits/destination_cubit.dart';
 import 'package:airplane/cubits/gallery_cubit.dart';
 import 'package:airplane/cubits/seat_cubit.dart';
 import 'package:airplane/cubits/transaction_cubit.dart';
+// ignore: depend_on_referenced_packages
 import 'package:provider/single_child_widget.dart';
 import 'package:airplane/cubits/auth_cubit.dart';
 import 'package:airplane/cubits/page_cubit.dart';

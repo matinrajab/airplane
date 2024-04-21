@@ -25,7 +25,7 @@ class BookingDetailCard extends StatelessWidget {
             location: destination.city,
             rating: destination.rating,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           BookingDetail(transaction),

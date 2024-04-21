@@ -34,11 +34,11 @@ class MyTextFormField extends StatelessWidget {
           cursorColor: primaryTextColor,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: inactiveColor),
+              borderSide: const BorderSide(color: inactiveColor),
               borderRadius: BorderRadius.circular(defaultRadius),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: primaryColor),
+              borderSide: const BorderSide(color: primaryColor),
               borderRadius: BorderRadius.circular(defaultRadius),
             ),
             hintText: hintText,

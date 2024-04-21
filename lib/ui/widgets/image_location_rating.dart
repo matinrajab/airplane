@@ -21,7 +21,7 @@ class ImageLocationRating extends StatelessWidget {
     return Row(
       children: [
         Gallery(imageUrl: imageUrl),
-        SizedBox(width: 16,),
+        const SizedBox(width: 16,),
         Expanded(
           child: LocationRating(
             destination: destination,

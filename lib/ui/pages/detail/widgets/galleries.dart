@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Galleries extends StatelessWidget {
-  Galleries({super.key});
+  const Galleries({super.key});
 
   @override
   Widget build(BuildContext context) {

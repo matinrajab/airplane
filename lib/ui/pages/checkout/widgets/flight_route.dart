@@ -12,7 +12,7 @@ class FlightRoute extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18),
           child: Image.asset('assets/image/image_checkout.png'),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Row(

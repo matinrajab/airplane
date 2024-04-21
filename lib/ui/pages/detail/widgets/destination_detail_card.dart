@@ -13,8 +13,8 @@ class DestinationDetailCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
+          const Padding(
+            padding: EdgeInsets.symmetric(
               horizontal: 20,
             ),
             child: Description(
@@ -22,11 +22,11 @@ class DestinationDetailCard extends StatelessWidget {
                   'Berada di jalur jalan provinsi yang menghubungkan Denpasar Singaraja serta letaknya yang dekat dengan Kebun Raya Eka Karya menjadikan tempat Bali.',
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Galleries(),
-          SizedBox(
+          const Galleries(),
+          const SizedBox(
             height: 20,
           ),
           Padding(
